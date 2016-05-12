@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:ss="http://www.springframework.org/schema/security"
+	 xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+	http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- 初始化properties文件,变量值可通过系统属性更改 -->
+	<bean id="propertyConfig"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:conf/main-setting.properties</value>
+		</property>
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />	
+	<!-- <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+	    <property name="dataSource" ref="dataSource"></property>  
+	</bean> 
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" /> -->
+	<!-- 数据源配置,非JNDI -->
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.ibm.db2.jcc.DB2Driver" />
+		<property name="url"
+			value="jdbc:db2://10.19.250.15:60000/simpledb:currentSchema=ARCHSMP;" />
+		<property name="username" value="db2inst1" />
+		<property name="password" value="FNU9r@bdq" />
+	</bean> -->
+	
+	<!-- JNDI数据源 -->
+	<!-- <jee:jndi-lookup id="dataSource" jndi-name="jdbc/sampleDS"
+		proxy-interface="javax.sql.DataSource" lookup-on-startup="false" />
+	 -->
+	<!-- JMS数据源的引用 -->
+	<!-- connection factory, if your send and receive queue managers are difference, then configure 2 factories  -->
+	<!-- <jee:jndi-lookup id="jmsConnectionFactory" jndi-name="jms/queueConnectionFactory"/>
+ -->	
+</beans>

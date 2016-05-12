@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+  
+<suite name="Suite1" verbose="1" >
+  <test name="app" >
+    <classes>
+       <class name="com.adanac.tool.rageon.AppTest" />
+    </classes>
+  </test>
+ 
+</suite>
