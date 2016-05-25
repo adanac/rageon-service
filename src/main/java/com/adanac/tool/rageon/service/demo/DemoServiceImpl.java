@@ -17,7 +17,7 @@ import com.adanac.tool.rageon.intf.demo.service.DemoService;
 public class DemoServiceImpl implements DemoService {
 
 	private Map<Integer, DemoDto> cache = new ConcurrentHashMap<Integer, DemoDto>();
-	private final static Integer INIT_DATA_NUM = 10;
+	private final static Integer INIT_DATA_NUM = 30;
 
 	@Override
 	public Pager<DemoDto> getDemoList(DemoDto demoDto, PagerParam pagerParam) {
