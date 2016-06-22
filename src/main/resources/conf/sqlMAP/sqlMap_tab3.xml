@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sqlMap namespace="tabTest">
+
+	<sql id="queryIn">
+    	<![CDATA[
+    	    select * from TAB3 where 1=1 
+    	    AND name in (${username})
+    			
+		]]>
+    </sql>
+    
+	<sql id="queryList">
+    	<![CDATA[
+    	    select * from TAB3 where 1=1 
+    	    <#if username?exists && username!="">
+    			and NAME like CONCAT('%', :username, '%')
+    		</#if>
+		]]>
+    </sql>
+    
+	<sql id="select">
+    	<![CDATA[
+    	    select * from TAB3 m
+    	    where 1=1
+    	    <#if username?exists && username!="">
+    			and m.name = :username
+    		</#if>
+    		 <#if pwd?exists && pwd!="">
+    			and m.pass = :pwd
+    		</#if>
+    	    <#if age?exists && age!="">
+    			and m.age = :age
+    		</#if>
+		]]>
+    </sql>
+	
+	<sql id="insert">
+    	<![CDATA[
+    	    insert into TAB3(NAME,PASS,AGE)
+    	    values 
+    	    (:name,:pwd,:age)
+    	    
+		]]>
+    </sql>
+    
+</sqlMap>
