@@ -25,8 +25,8 @@ public class SqlServiceImpl implements SqlService {
 		BaseResult br = new BaseResult();
 		try {
 			CommonDto dto = new CommonDto();
-			dto.setName(username);
-			dto.setPwd(pwd);
+			dto.setUsername(username);
+			dto.setPasswd(pwd);
 			dto.setAge(age);
 			int count = baseDao.execute("tabTest.insert", dto);
 			br.setContent(count);

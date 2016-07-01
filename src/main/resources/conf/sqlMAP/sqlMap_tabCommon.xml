@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sqlMap namespace="tabCommon">
+
+	<sql id="queryCond">
+    	<![CDATA[
+    	    select * from tab_common m
+    	    where 1=1
+    	    <#if id?exists && id!="">
+    			and m.id like :id
+    		</#if>
+    	    <#if username?exists && username!="">
+    			and m.username like CONCAT('%',:username,'%')
+    		</#if>
+    		 <#if passwd?exists && passwd!="">
+    			and m.passwd = :passwd
+    		</#if>
+    	    <#if age?exists && age!="">
+    			and m.age = :age
+    		</#if>
+		]]>
+    </sql>
+
+	<sql id="select">
+    	<![CDATA[
+    	    select * from tab_common m
+    	    where 1=1
+    	    <#if id?exists && id!="">
+    			and m.id = :id
+    		</#if>
+    	    <#if username?exists && username!="">
+    			and m.username = :username
+    		</#if>
+    		 <#if passwd?exists && passwd!="">
+    			and m.passwd = :passwd
+    		</#if>
+    	    <#if age?exists && age!="">
+    			and m.age = :age
+    		</#if>
+		]]>
+    </sql>
+	
+	<sql id="insert">
+    	<![CDATA[
+    	    insert into tab_common(ID,USERNAME,PASSWD,AGE)
+    	    values 
+    	    (:id,:username,:passwd,:age)
+		]]>
+    </sql>
+    
+    <sql id="update">
+    	<![CDATA[
+    	    update tab_common set ID = :id
+    	    <#if username?exists && username!="">
+    	    	,username = :username
+    	    </#if>
+    	    <#if passwd?exists && passwd!="">
+    	    	,passwd = :passwd
+    	    </#if>
+    	    <#if age?exists && age!="">
+    	    	,age = :age
+    	    </#if>
+    	    where ID = :id
+		]]>
+    </sql>
+    
+    <sql id="delete">
+    	<![CDATA[
+    	    delete from tab_common where ID = :id
+		]]>
+    </sql>
+    
+</sqlMap>
