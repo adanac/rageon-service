@@ -27,4 +27,8 @@
 		</property>
 	</bean>
 
+	<!-- 自定义配置 
+	<bean id="solrCommonDtosSearchService" class="com.adanac.tool.rageon.service.module.solr.SolrGoodsSearchServiceImpl" >
+		<property name="nodeName" value="rageon_solr" />
+	</bean>-->
 </beans>
