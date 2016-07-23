@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.stereotype.Repository;
 
 import com.adanac.framework.dac.client.IPaginationDacClient;
@@ -152,5 +153,10 @@ public class BaseDaoImpl implements BaseDao {
 	@Override
 	public Number execute4PrimaryKey(String sqlId, Map<String, Object> paramMap) {
 		return dalClient.execute4PrimaryKey(sqlId, paramMap);
+	}
+
+	@Override
+	public Map<String, Object> call(String sqlId, Map<String, Object> paramMap, List<SqlParameter> sqlParameters) {
+		return dalClient.call(sqlId, paramMap, sqlParameters);
 	}
 }

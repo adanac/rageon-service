@@ -31,4 +31,13 @@
 	<bean id="solrCommonDtosSearchService" class="com.adanac.tool.rageon.service.module.solr.SolrGoodsSearchServiceImpl" >
 		<property name="nodeName" value="rageon_solr" />
 	</bean>-->
+	
+	<!-- 自定义配置 -->
+	<bean id="activeMqService" class="com.adanac.tool.rageon.service.module.mq.ActiveMqServiceImpl" >
+		<!-- 这里的value值rage_monitor 是统一配置disconf中的配置项，如应用hh_rageon_rd环境中的key值   
+			它代表的是一人路径，zookeeper是去加载这个路径 adanac//rage_monitor
+		<property name="nodeName" value="rage_monitor" />
+		-->
+	</bean>
+	
 </beans>

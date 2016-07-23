@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sqlMap namespace="activity">
+	<sql id="insert">
+    	<![CDATA[
+    		insert into activitys.MARKET_LIMITED
+				  (ID,SUPP_ID,NAME,START_DTTM,DESCRIPE,END_DTTM,DISCOUNT_TYPE,STATUS,CREATE_DTTM,LAST_DTTM,LAST_PER,URL,IMG,INFO)
+			values(:id,:suppId,:name,:startDttm,:descripe,:endDttm,:discountType,:status,:createDttm,:lastDttm,:lastPer,:url,:img,:info)
+
+		]]>
+    </sql>
+    
+    <sql id="select">
+    	<![CDATA[
+    		
+   		SELECT
+			*
+		FROM
+			(
+    		SELECT
+			ID AS id,
+			SUPP_ID AS suppId,
+			
+			NAME AS NAME,
+			START_DTTM AS startDttm,
+			END_DTTM AS endDttm,
+			DISCOUNT_TYPE AS discountType,
+			CREATE_DTTM AS createDttm,
+			LAST_DTTM AS lastDttm,
+			LAST_PER AS lastPer,
+			URL AS url,
+			IMG AS img,
+			INFO AS info,
+			CASE WHEN `STATUS` = 0 AND NOW() BETWEEN START_DTTM AND END_DTTM THEN 	0 /*已开始*/
+					 WHEN `STATUS` IN (0, 1) AND ( 	( NOW() BETWEEN START_DTTM AND END_DTTM ) OR (NOW() < START_DTTM) ) THEN 1 /*未开始*/
+					 WHEN ( (`STATUS` = 2) OR (NOW() > END_DTTM) ) THEN 2 END status /*已结束*/ 
+    		
+    		from activitys.MARKET_LIMITED where 1=1 
+    		<#if id?exists && id!="">
+    			and ID = :id
+    		</#if>
+    		<#if suppId?exists && suppId!="">
+    			and SUPP_ID = :suppId
+    		</#if>
+    		<#if name?exists && name!="">
+    			and NAME like CONCAT('%', :name, '%')
+    		</#if>
+    		<#if startDttm?exists && startDttm!="" && endDttm?exists && endDttm!="">
+    	    	and ((START_DTTM >= :startDttm and START_DTTM <= :endDttm) 
+    				or (END_DTTM >= :startDttm and END_DTTM <= :endDttm) 
+    				or (START_DTTM <= :startDttm and END_DTTM >= :endDttm)
+    				or (START_DTTM >= :startDttm and END_DTTM <= :endDttm))
+    	   	</#if>
+    	   	) ALLSULT
+				where 1=1 
+				<#if status?exists && status!="">
+    				and status = :status
+    			</#if>
+			ORDER BY
+				status ASC
+			 	 <#if orderName?exists && orderName!="">
+	    	    	,${orderName}  ${orderBy}
+	    	   	 </#if>
+		]]>
+    </sql>
+    
+    <sql id="selectByParamAdd">
+    	<![CDATA[
+    		select ID as id,SUPP_ID as suppId,NAME as name,START_DTTM as startDttm,END_DTTM as endDttm,DISCOUNT_TYPE as discountType,
+    		status as status,CREATE_DTTM as createDttm,LAST_DTTM as lastDttm,LAST_PER as lastPer,URL as url,IMG as img,INFO as info 
+    		from activitys.MARKET_LIMITED where 1=1 
+    		<#if name?exists && name!="">
+    			and NAME = :name
+    		</#if>
+    		<#if startDttm?exists && startDttm!="">
+    			and START_DTTM = :startDttm
+    		</#if>
+    		<#if endDttm?exists && endDttm!="">
+    			and END_DTTM = :endDttm
+    		</#if>
+    		order by CREATE_DTTM asc
+		]]>
+    </sql>
+	
+	<sql id="updateById">
+    	<![CDATA[
+    		update activitys.MARKET_LIMITED set ID = :id 
+    		<#if suppId?exists && suppId!="">
+    			, SUPP_ID = :suppId
+    		</#if>
+    		<#if name?exists && name!="">
+    			, NAME = :name
+    		</#if>
+    		<#if startDttm?exists && startDttm!="">
+    			, START_DTTM = :startDttm
+    		</#if>
+    		<#if endDttm?exists && endDttm!="">
+    			, END_DTTM = :endDttm
+    		</#if>
+    		<#if discountType?exists && discountType!="">
+    			, DISCOUNT_TYPE = :discountType
+    		</#if>
+    		<#if lastDttm?exists && lastDttm!="">
+    			, LAST_DTTM = :lastDttm
+    		</#if>
+    		<#if lastPer?exists && lastPer!="">
+    			, LAST_PER = :lastPer
+    		</#if>
+    		<#if url?exists && url!="">
+    			, URL = :url
+    		</#if>
+    		<#if img?exists && img!="">
+    			, IMG = :img
+    		</#if>
+    		<#if info?exists && info!="">
+    			, INFO = :info
+    		</#if>
+    		WHERE ID = :id
+		]]>
+    </sql>
+    
+    <sql id="stopById">
+    	<![CDATA[
+    		update activitys.MARKET_LIMITED set ID = :id 
+    		<#if status?exists && status!="">
+    			, status = :status
+    		</#if>
+    		WHERE ID = :id
+		]]>
+    </sql>
+    
+    <sql id="deleteById">
+    	<![CDATA[
+    		delete from activitys.MARKET_LIMITED where ID = :id
+		]]>
+    </sql>
+	
+    <sql id="selectByGoodsId">
+    	<![CDATA[
+    		select ID as id,SUPP_ID as suppId,NAME as name,START_DTTM as startDttm,END_DTTM as endDttm,DISCOUNT_TYPE as discountType,
+    		status as status,CREATE_DTTM as createDttm,LAST_DTTM as lastDttm,LAST_PER as lastPer,URL as url,IMG as img,INFO as info 
+			from activitys.MARKET_LIMITED where 1=1 
+			and ID in(select LIMITED_ID from market_cmmdty where CMMDTY_ID = :goodsId)
+		    and ID != :id
+		]]>
+    </sql>
+    
+     <sql id="queryRepeatActivityList">
+    	<![CDATA[
+			select b.id as id,b.SUPP_ID as suppId,b.name as name,b.START_DTTM as startDttm,b.END_DTTM as endDttm,b.DISCOUNT_TYPE as discountType   
+    		from  activitys.market_limited a,activitys.market_limited b
+    		where b.status=0 
+    			and b.id!=:activityId 
+			 	and a.id=:activityId
+				and a.supp_id=:suppId
+				and (
+					(a.START_DTTM>=b.START_DTTM and a.START_DTTM<=b.END_DTTM)
+					or (a.END_DTTM>=b.START_DTTM and a.END_DTTM<=b.END_DTTM)
+					or (a.START_DTTM<=b.START_DTTM and a.END_DTTM>=b.END_DTTM)
+					or (a.START_DTTM>=b.START_DTTM and a.END_DTTM<=b.END_DTTM)
+				)
+				
+		]]>
+    </sql>
+	
+</sqlMap>

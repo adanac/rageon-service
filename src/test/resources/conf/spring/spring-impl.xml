@@ -11,7 +11,7 @@
    	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<!-- 注册相关后置处理器,扫描包路径下的注解配置 -->
-	 <context:component-scan base-package="com.adanac.b2b" >
+	 <context:component-scan base-package="com.adanac.tool" >
 	 	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>   
 	 </context:component-scan>
 	<!-- 初始化logback配置文件 -->

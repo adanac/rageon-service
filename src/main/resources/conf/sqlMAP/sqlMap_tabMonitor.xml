@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sqlMap namespace="tabMonitor">
+
+	<sql id="queryCond">
+    	<![CDATA[
+    	    select * from tab_monitor m
+    	    where 1=1
+    	    <#if id?exists && id!="">
+    			and m.id = :id
+    		</#if>
+    	    <#if type?exists && type!="">
+    			and m.type = :type
+    		</#if>
+    		<#if happenTime?exists && happenTime!="">
+    	    	and (HAPPEN_TIME >= :happenTime)
+    	   	</#if>
+    	   	<#if processTime?exists && processTime!="">
+    	    	and (PROCESS_TIME >= :processTime)
+    	   	</#if>
+    	   	<#if content?exists && content!="">
+    	    	and CONTENT LIKE CONCAT('%',:content,'%')
+    	   	</#if>
+		]]>
+    </sql>
+
+	<sql id="select">
+    	<![CDATA[
+    	    select * from tab_monitor m
+    	    where 1=1
+    	    <#if id?exists && id!="">
+    			and m.ID = :id
+    		</#if>
+    	    <#if type?exists && type!="">
+    			and m.TYPE = :type
+    		</#if>
+    		 <#if happenTime?exists && happenTime!="">
+    			and m.HAPPEN_TIME > :happenTime
+    		</#if>
+    	    <#if processTime?exists && processTime!="">
+    			and m.PROCESS_TIME > :processTime
+    		</#if>
+		]]>
+    </sql>
+	
+	<sql id="insert">
+    	<![CDATA[
+    	    insert into tab_monitor(ID,TYPE,HAPPEN_TIME,CONTENT)
+    	    values 
+    	    (:id,:type,:happenTime,:content)
+		]]>
+    </sql>
+    
+    <sql id="update">
+    	<![CDATA[
+    	    update tab_monitor set ID = :id
+    	    <#if type?exists && type!="">
+    	    	,TYPE = :type
+    	    </#if>
+    	    <#if processTime?exists && processTime!="">
+    	    	,PROCESS_TIME = :processTime
+    	    </#if>
+    	    <#if content?exists && content!="">
+    	    	,CONTENT = :content
+    	    </#if>
+    	    where ID = :id
+		]]>
+    </sql>
+    
+    <sql id="delete">
+    	<![CDATA[
+    	    delete from tab_monitor where ID = :id
+		]]>
+    </sql>
+    
+</sqlMap>

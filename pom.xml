@@ -18,6 +18,11 @@
 		<artifactId>rageon-intf</artifactId>
 		<version>1.0.0</version>
 	</dependency>
+	<dependency>
+		<groupId>com.adanac.framework</groupId>
+		<artifactId>adanac-mq</artifactId>
+		<version>1.0.0</version>
+	</dependency>
 	</dependencies>
 	<scm><!-- 注意：必须是正确的svn路径 -->
 	</scm>
