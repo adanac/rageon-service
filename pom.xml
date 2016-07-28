@@ -23,6 +23,11 @@
 		<artifactId>adanac-mq</artifactId>
 		<version>1.0.0</version>
 	</dependency>
+	<dependency>
+		<groupId>com.adanac.commclient</groupId>
+		<artifactId>solr-client</artifactId>
+		<version>1.0.0</version>
+	</dependency>
 	</dependencies>
 	<scm><!-- 注意：必须是正确的svn路径 -->
 	</scm>

@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JMockit Coverage Report - SolrCommonDtoSearchServiceImpl.java</title>
+  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+  <link rel='stylesheet' type='text/css' href='../../../../../../../coverage.css'/>
+  <link rel='shortcut icon' type='image/png' href='../../../../../../../logo.png'/>
+  <script type='text/javascript' src='../../../../../../../coverage.js'></script>
+  <script type='text/javascript' src='../../../../../../../prettify.js'></script>
+</head>
+<body onload='prettyPrint()'>
+  <table cellpadding='0' cellspacing='1'>
+    <caption>rageon-service\src\main\java\com\adanac\tool\rageon\service\module\solr\SolrCommonDtoSearchServiceImpl.java</caption>
+    <tr>
+      <td class='line'>1</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>package com.adanac.tool.rageon.service.module.solr;</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td><pre class='imports prettyprint' onclick='showHideLines(this)'><div>import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.stereotype.Service;
+
+import com.adanac.framework.exception.SysException;
+import com.adanac.framework.log.MyLogger;
+import com.adanac.framework.log.MyLoggerFactory;
+import com.adanac.framework.page.Pager;
+import com.adanac.framework.page.PagerParam;
+import com.adanac.framework.uniconfig.client.UniconfigClient;
+import com.adanac.framework.uniconfig.client.UniconfigClientImpl;
+import com.adanac.framework.uniconfig.client.UniconfigNode;
+import com.adanac.framework.utils.StringUtils;
+import com.adanac.tool.rageon.intf.common.entity.CommonDto;
+import com.adanac.tool.rageon.intf.module.solr.service.SolrCommonSearchService;
+import com.adanac.tool.rageon.utils.UrlBuilder;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+</div><span>import ...</span></pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>36</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>@Service("solrCommonDtoSearchService")</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>37</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>public class SolrCommonDtoSearchServiceImpl implements SolrCommonSearchService, InitializingBean {</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>39</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	private MyLogger <span class='instance uncovered' title='Reads: 0 Writes: 0'>logger</span> = MyLoggerFactory.getLogger(SolrGoodsSearchServiceImpl.class);</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>41</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	@Override</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>42</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	public Pager&lt;CommonDto> queryDtos(CommonDto dto, PagerParam pagerParam) {</pre></td>
+    </tr>
+    <tr>
+      <td></td><td class='count'>0</td>
+      <td class='paths'>
+        <span style='cursor:default; background-color:#ff0000' onclick='hidePath()'>Path coverage: 0/2</span>
+        <span class='uncovered' onclick="showPath(this,'l43s0 l57s0 l61s0 l66s0')">A: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l43s0 l57s0 l58s0 l61s0 l66s0')">B: 0</span>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>43</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		Pager&lt;CommonDto> dtos = null;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>44</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		try {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>45</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			PagerParam param = new PagerParam();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>46</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			param.setPageNumber(pagerParam.getPageNumber());</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>47</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			param.setPageSize(pagerParam.getPageSize());</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>48</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			param.setOrderBy("age");</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>49</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			param.setOrderAsc(false);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>50</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			Map&lt;String, Object> map = new HashMap&lt;String, Object>();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>51</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			map.put("id", dto.getId());</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>52</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			map.put("username", dto.getUsername());</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>53</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			map.put("passwd", dto.getPasswd());</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>54</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			map.put("age", dto.getAge());</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>56</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			Pager&lt;CommonDto> list = searchCommonDtos(map, param);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>57</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			if (list.getDatas() == null) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>58</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>				List&lt;CommonDto> listData = new ArrayList&lt;CommonDto>();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>59</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>				list.setDatas(listData);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>60</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			}</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>61</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			dtos = new Pager&lt;CommonDto>(list.getTotalDataCount(), pagerParam.getPageSize(), pagerParam.getPageNumber());</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>62</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		} catch (Exception e) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>63</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			dtos = null;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>64</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			e.printStackTrace();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>65</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		}</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>66</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		return dtos;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>67</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	}</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>69</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	private Properties <span class='instance uncovered' title='Reads: 0 Writes: 0'>prop</span>;</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>71</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	@Override</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>72</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	public Pager&lt;CommonDto> searchCommonDtos(Map&lt;String, Object> map, PagerParam param) {</pre></td>
+    </tr>
+    <tr>
+      <td></td><td class='count'>0</td>
+      <td class='paths'>
+        <span style='cursor:default; background-color:#ff0000' onclick='hidePath()'>Path coverage: 0/2</span>
+        <span class='uncovered' onclick="showPath(this,'l73s0 l86s0 l87s0 l88s0')">A: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l73s0 l86s0 l90s0 l96s0 l100s0 l105s0')">B: 0</span>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>73</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		Pager&lt;CommonDto> pager = new Pager&lt;CommonDto>();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>74</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		try {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>75</td><td>&nbsp;</td>
+      <td><pre class='comment'>			// 组装solr查询链接</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>76</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			String requestUrl = assmbleSearchParams(map, param, pager);</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>78</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			List&lt;CommonDto> sList = new ArrayList&lt;CommonDto>();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>79</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			logger.info("searchDtos url {}", requestUrl);</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>81</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			String result = this.execute(requestUrl);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>82</td><td>&nbsp;</td>
+      <td><pre class='comment'>			// 转换对象</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>83</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			JSONObject jsonObject = JSONObject.parseObject(result);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>84</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			JSONObject responseHead = jsonObject.getJSONObject("responseHeader");</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>85</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			String stat = responseHead.getString("status");</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>86</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			if (!"0".equals(stat)) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>87</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>				logger.error("query fail stat {}", stat);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>88</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>				return pager;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>89</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			}</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>90</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			JSONObject response = jsonObject.getJSONObject("response");</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>91</td><td>&nbsp;</td>
+      <td><pre class='comment'>			// 获取总记录条数</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>92</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			int numFound = response.getIntValue("numFound");</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>93</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			pager.setTotalDataCount(numFound);</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>95</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			JSONArray docs = response.getJSONArray("docs");</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>96</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			for (int i = 0; i &lt; docs.size(); i++) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>97</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>				JSONObject json = docs.getJSONObject(i);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>98</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>				sList.add(JSONObject.toJavaObject(json, CommonDto.class));</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>99</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			}</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>100</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			for (CommonDto dto : sList) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>101</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>				logger.info(dto.toString());</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>102</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			}</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>103</td><td>&nbsp;</td>
+      <td><pre class='comment'>			// logger.info("queryBytitle result : {}", result);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>104</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			pager.setDatas(sList);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>105</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			return pager;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>106</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		} catch (Exception e) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>107</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			logger.error("searchDtos fail", e);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>108</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			return pager;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>109</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		}</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>110</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	}</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>112</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	@Override</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>113</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	public CommonDto getCommonDtoById(String id) {</pre></td>
+    </tr>
+    <tr>
+      <td></td><td class='count'>0</td>
+      <td class='paths'>
+        <span style='cursor:default; background-color:#ff0000' onclick='hidePath()'>Path coverage: 0/3</span>
+        <span class='uncovered' onclick="showPath(this,'l114s0 l121s0 l121s1 l122s0')">A: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l114s0 l121s0 l124s0')">B: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l114s0 l121s0 l121s1 l124s0')">C: 0</span>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>114</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		Map&lt;String, Object> map = new HashMap&lt;>();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>115</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		PagerParam param = new PagerParam();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>116</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		param.setPageNumber(1);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>117</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		param.setPageSize(10);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>118</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		map.put("userId", id);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>119</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		Pager&lt;CommonDto> page = searchCommonDtos(map, param);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>120</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		List&lt;CommonDto> datas = page.getDatas();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>121</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		if (datas != null && !datas.isEmpty()) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>122</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			return datas.get(0);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>123</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		}</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>124</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		return null;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>125</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	}</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>127</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	@Override</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>128</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	public CommonDto getCommonDtoByEntity(CommonDto dto) {</pre></td>
+    </tr>
+    <tr>
+      <td></td><td class='count'>0</td>
+      <td class='paths'>
+        <span style='cursor:default; background-color:#ff0000' onclick='hidePath()'>Path coverage: 0/3</span>
+        <span class='uncovered' onclick="showPath(this,'l129s0 l137s0 l137s1 l138s0')">A: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l129s0 l137s0 l140s0')">B: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l129s0 l137s0 l137s1 l140s0')">C: 0</span>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>129</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		Map&lt;String, Object> map = new HashMap&lt;>();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>130</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		PagerParam param = new PagerParam();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>131</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		param.setPageNumber(1);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>132</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		param.setPageSize(10);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>133</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		map.put("username", dto.getUsername());</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>134</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		map.put("passwd", dto.getPasswd());</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>135</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		Pager&lt;CommonDto> page = searchCommonDtos(map, param);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>136</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		List&lt;CommonDto> datas = page.getDatas();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>137</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		if (datas != null && !datas.isEmpty()) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>138</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			return datas.get(0);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>139</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		}</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>140</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		return null;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>141</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	}</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>	/**
+	 * 组装查询的链接
+	 * 
+	 * @param map
+	 * @param param
+	 * @param pager
+	 * @return
+	 */</div><span>	/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>151</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	private String assmbleSearchParams(Map&lt;String, Object> map, PagerParam param, Pager&lt;CommonDto> pager) {</pre></td>
+    </tr>
+    <tr>
+      <td></td><td class='count'>0</td>
+      <td class='paths'>
+        <span style='cursor:default; background-color:#ff0000' onclick='hidePath()'>Path coverage: 0/192</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">A: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">B: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">C: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">D: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">E: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">F: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">G: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">H: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">I: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">J: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">K: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">L: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">M: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">N: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">O: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">P: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">Q: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">R: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">S: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">T: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">U: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">V: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">W: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">X: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">Y: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">Z: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">AA: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">AB: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">AC: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">AD: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">AE: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">AF: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">AG: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">AH: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">AI: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">AJ: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">AK: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">AL: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">AM: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">AN: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">AO: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">AP: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">AQ: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">AR: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">AS: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">AT: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">AU: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">AV: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">AW: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">AX: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">AY: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">AZ: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">BA: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">BB: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">BC: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">BD: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">BE: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">BF: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">BG: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">BH: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">BI: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">BJ: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">BK: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">BL: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">BM: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">BN: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">BO: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">BP: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">BQ: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">BR: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">BS: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">BT: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">BU: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">BV: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">BW: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">BX: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">BY: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">BZ: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">CA: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">CB: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">CC: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">CD: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">CE: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">CF: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">CG: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">CH: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">CI: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">CJ: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">CK: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">CL: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">CM: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">CN: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">CO: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">CP: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">CQ: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s2 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">CR: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">CS: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">CT: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">CU: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">CV: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">CW: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">CX: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">CY: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">CZ: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">DA: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">DB: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">DC: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">DD: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">DE: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">DF: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">DG: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">DH: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">DI: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">DJ: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">DK: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">DL: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">DM: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">DN: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">DO: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">DP: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">DQ: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">DR: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">DS: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">DT: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">DU: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">DV: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">DW: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">DX: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">DY: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">DZ: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">EA: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">EB: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">EC: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">ED: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">EE: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">EF: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">EG: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">EH: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">EI: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">EJ: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">EK: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">EL: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">EM: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s2 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">EN: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">EO: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">EP: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">EQ: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">ER: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">ES: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">ET: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">EU: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">EV: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">EW: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">EX: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">EY: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">EZ: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">FA: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">FB: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">FC: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">FD: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">FE: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">FF: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">FG: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">FH: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">FI: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">FJ: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">FK: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s2 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">FL: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">FM: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">FN: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">FO: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">FP: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">FQ: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">FR: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">FS: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">FT: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">FU: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">FV: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">FW: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">FX: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">FY: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">FZ: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">GA: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">GB: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">GC: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">GD: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l181s0 l183s0 l197s0')">GE: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">GF: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">GG: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l181s0 l183s0 l197s0')">GH: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s2 l178s3 l183s0 l197s0')">GI: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l152s0 l152s1 l152s3 l153s0 l153s1 l153s3 l154s0 l154s1 l154s3 l157s0 l158s0 l160s0 l161s0 l163s0 l164s0 l167s0 l177s0 l178s0 l178s1 l178s3 l183s0 l197s0')">GJ: 0</span>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>152</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		String id = map.get("id") == null ? "" : map.get("id").toString();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>153</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		String username = map.get("username") == null ? "" : map.get("username").toString();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>154</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		String passwd = map.get("passwd") == null ? "" : map.get("passwd").toString();</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>156</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		StringBuffer sb = new StringBuffer();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>157</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		if (StringUtils.isEmpty(username)) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>158</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			username = "*";</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>159</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		}</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>160</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		if (!StringUtils.isEmpty(id)) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>161</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			sb.append(" AND id:" + id);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>162</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		}</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>163</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		if (!StringUtils.isEmpty(passwd)) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>164</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			sb.append(" AND passwd:" + passwd);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>165</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		}</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>167</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		int pageSize = param.getPageSize();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>168</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		int pageNumber = param.getPageNumber();</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>170</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		pager.setPageNumber(pageNumber);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>171</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		pager.setPageSize(pageSize);</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>173</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		pageNumber = pageNumber - 1;</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>175</td><td>&nbsp;</td>
+      <td><pre class='comment'>		// 排序通过sort参数传递，格式为“字段名”+“空格”+ “ASC或者DESC”，多个排序字段通过“,”连接</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>176</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		String sort = "";</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>177</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		if (!StringUtils.isEmpty(param.getOrderBy())) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>178</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			sort = param.getOrderBy() + " " + (param.isOrderAsc() == true ? "ASC" : "DESC");</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>179</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			sort += ",age DESC";</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>180</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		} else {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>181</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			sort = "age DESC";</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>182</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		}</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>183</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		UrlBuilder urlBuilder = UrlBuilder.create();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>184</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		urlBuilder.addPrefix("/select?").appendWithoutPrefix("q", sb.toString()).append("wt", "json")</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>185</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>				.append("indent", "false").append("start", (pageNumber * pageSize) + "").append("rows", pageSize + "")</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>186</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>				.append("sort", sort);</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>188</td><td>&nbsp;</td>
+      <td><pre class='comment'>		// 高亮配置</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>189</td><td>&nbsp;</td>
+      <td><pre class='comment'>		// if (StringUtils.hasText(hlField)){</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>190</td><td>&nbsp;</td>
+      <td><pre class='comment'>		// urlBuilder.append("hl","true")</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>191</td><td>&nbsp;</td>
+      <td><pre class='comment'>		// .append("hl.fl",hlField)</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>192</td><td>&nbsp;</td>
+      <td><pre class='comment'>		// .append("hl.simple.pre",hlPre)</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>193</td><td>&nbsp;</td>
+      <td><pre class='comment'>		// .append("hl.simple.post",hlPost);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>194</td><td>&nbsp;</td>
+      <td><pre class='comment'>		// }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>196</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		String requestUrl = urlBuilder.build();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>197</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		return requestUrl;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>198</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	}</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>	/**
+	 * http访问
+	 * 
+	 * @param url
+	 * @return
+	 */</div><span>	/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>206</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	public String execute(String url) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>207</td><td>&nbsp;</td>
+      <td><pre class='comment'>		// httpClientBuilder = HttpClientBuilder.create();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>208</td><td>&nbsp;</td>
+      <td><pre class='comment'>		// httpClientBuilder.build();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>209</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		HttpClient httpClient = new DefaultHttpClient();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>210</td><td>&nbsp;</td>
+      <td><pre class='comment'>		// CloseableHttpClient httpClient = httpClientBuilder.build();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>211</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		String coreUrl = prop.getProperty("coreUrl");</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>213</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		logger.info("execute core {}", coreUrl + url);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>214</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		HttpGet httpGet = new HttpGet(coreUrl + url);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>215</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		try {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>216</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			HttpResponse httpResponse = httpClient.execute(httpGet);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>217</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			HttpEntity entity = httpResponse.getEntity();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>218</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			return EntityUtils.toString(entity);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>219</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		} catch (IOException e) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>220</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			logger.error("execute get error", e);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>221</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			throw new SysException("execute solr fail", e);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>222</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		} finally {</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>224</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		}</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>225</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	}</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>227</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	@Override</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>228</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	public void afterPropertiesSet() throws Exception {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>229</td><td>&nbsp;</td>
+      <td><pre class='comment'>		// prop = getpro();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>230</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		logger.info("afterPropertiesSet prop {}", prop);</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>232</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	}</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>234</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	public Properties getpro() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>235</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		UniconfigClient client = UniconfigClientImpl.getInstance();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>236</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		UniconfigNode node = client.getConfig("rageon_solr");</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>237</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		node.sync();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>238</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		String configValue = node.getValue();</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>240</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		Properties properties = new Properties();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>241</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		InputStream in = new ByteArrayInputStream(configValue.getBytes());</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>242</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		try {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>243</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			properties.load(in);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>244</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		} catch (IOException e) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>245</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			e.printStackTrace();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>246</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		}</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>247</td><td>&nbsp;</td>
+      <td><pre class='comment'>		// properties.load(configValue);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>248</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		return properties;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>249</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	}</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>251</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>}</pre></td>
+    </tr>
+  </table>
+</body>
+</html>

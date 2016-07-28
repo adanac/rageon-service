@@ -16,7 +16,10 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
+import com.adanac.commclient.solr.SolrGoodsSearchServiceImpl;
 import com.adanac.framework.exception.SysException;
 import com.adanac.framework.log.MyLogger;
 import com.adanac.framework.log.MyLoggerFactory;
@@ -29,7 +32,7 @@ import com.adanac.framework.utils.StringUtils;
 import com.adanac.tool.rageon.constant.AnchoredTypeEnum;
 import com.adanac.tool.rageon.constant.SkuStatusEnum;
 import com.adanac.tool.rageon.intf.module.solr.entity.SolrGoodsDto;
-import com.adanac.tool.rageon.intf.module.solr.service.SolrGoodsSearchService;
+import com.adanac.tool.rageon.intf.module.solr.service.SearchService;
 import com.adanac.tool.rageon.utils.EscapeUtil;
 import com.adanac.tool.rageon.utils.UrlBuilder;
 import com.alibaba.fastjson.JSONArray;
@@ -39,22 +42,26 @@ import com.alibaba.fastjson.JSONObject;
  * 商品搜索的服务类，主要对接solr进行商品数据的搜索，并提供给前端检索商品使用
  * 
  */
-// @Service("solrGoodsSearchService")
-public class SolrGoodsSearchServiceImpl implements SolrGoodsSearchService, InitializingBean {
+@Service("searchService")
+public class SearchServiceImpl implements SearchService, InitializingBean {
+
+	// private SolrGoodsSearchService goodsSearchService;
 
 	private MyLogger logger = MyLoggerFactory.getLogger(SolrGoodsSearchServiceImpl.class);
 
 	private Properties prop;
 
-	private String nodeName;
+	// private String nodeName;
+	@Value(value = "${rageonSolrName}")
+	private String rageonSolrName;
 
-	public String getNodeName() {
-		return nodeName;
-	}
-
-	public void setNodeName(String nodeName) {
-		this.nodeName = nodeName;
-	}
+	// public String getNodeName() {
+	// return nodeName;
+	// }
+	//
+	// public void setNodeName(String nodeName) {
+	// this.nodeName = nodeName;
+	// }
 
 	@Override
 	public Pager<SolrGoodsDto> searchGoods(Map<String, Object> map, PagerParam param) {
@@ -101,14 +108,37 @@ public class SolrGoodsSearchServiceImpl implements SolrGoodsSearchService, Initi
 
 	public static void main(String[] args) {
 		SolrGoodsSearchServiceImpl s = new SolrGoodsSearchServiceImpl();
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("status", "1,3");
-		map.put("cooPeratorType", 0);
-
+		// Map<String, Object> map = new HashMap<String, Object>();
+		// map.put("status", "1,3");
+		// map.put("cooPeratorType", 0);
+		//
+		// PagerParam param = new PagerParam();
+		// Pager<SolrGoodsDto> pager = new Pager<SolrGoodsDto>();
+		// String url = s.assmbleSearchParams(map, param, pager);
+		// System.out.println("url=" + url);
+		String companyId = "1042";
+		String goodName = "apple";
+		String desc = "true";
 		PagerParam param = new PagerParam();
-		Pager<SolrGoodsDto> pager = new Pager<SolrGoodsDto>();
-		String url = s.assmbleSearchParams(map, param, pager);
-		System.out.println("url=" + url);
+		param.setPageNumber(1);
+		param.setPageSize(10);
+		Pager<com.adanac.commclient.solr.dto.SolrGoodsDto> datas = s.searchGoods(companyId, null, goodName, desc, null,
+				param);
+		System.out.println(datas.getDatas().size());
+	}
+
+	/**
+	 * 测试solr-client
+	 */
+	@Override
+	public Pager<com.adanac.commclient.solr.dto.SolrGoodsDto> searchGoodsSolrClient(String companyId) {
+		SolrGoodsSearchServiceImpl solrGood = new SolrGoodsSearchServiceImpl();
+		PagerParam param = new PagerParam();
+		param.setPageNumber(1);
+		param.setPageSize(10);
+		Pager<com.adanac.commclient.solr.dto.SolrGoodsDto> datas = solrGood.searchGoods(companyId, null, null, null,
+				null, param);
+		return datas;
 	}
 
 	/**
@@ -316,7 +346,8 @@ public class SolrGoodsSearchServiceImpl implements SolrGoodsSearchService, Initi
 
 	public Properties getpro() {
 		UniconfigClient client = UniconfigClientImpl.getInstance();
-		UniconfigNode node = client.getConfig(nodeName);
+		// UniconfigNode node = client.getConfig(nodeName);
+		UniconfigNode node = client.getConfig(rageonSolrName);
 		node.sync();
 		String configValue = node.getValue();
 

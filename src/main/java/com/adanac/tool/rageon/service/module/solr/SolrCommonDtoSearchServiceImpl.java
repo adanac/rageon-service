@@ -33,10 +33,10 @@ import com.adanac.tool.rageon.utils.UrlBuilder;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
-@Service("solrCommonDtoSearchService")
+@Service("SolrCommonDtoSearchServiceImpl")
 public class SolrCommonDtoSearchServiceImpl implements SolrCommonSearchService, InitializingBean {
 
-	private MyLogger logger = MyLoggerFactory.getLogger(SolrGoodsSearchServiceImpl.class);
+	private MyLogger logger = MyLoggerFactory.getLogger(SolrCommonDtoSearchServiceImpl.class);
 
 	@Override
 	public Pager<CommonDto> queryDtos(CommonDto dto, PagerParam pagerParam) {
