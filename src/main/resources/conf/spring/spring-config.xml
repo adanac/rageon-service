@@ -26,12 +26,12 @@
    	</bean> -->
    	
    	<!-- MQConsumer -->
-   	<bean id="monitorConsumer" class="com.adanac.framework.mq.activemq.consumer.MQConsumer">
+   	<bean id="consumer" class="com.adanac.framework.mq.activemq.consumer.MQConsumer">
    		<constructor-arg ref="activeMQTemplate"></constructor-arg>
    	</bean>
    	
    	<!-- MQProducer -->
-   	 <bean id="monitorProducer" class="com.adanac.framework.mq.activemq.producer.MQProducer">
+   	 <bean id="producer" class="com.adanac.framework.mq.activemq.producer.MQProducer">
    		<constructor-arg ref="activeMQTemplate"></constructor-arg>
    	</bean>
    	

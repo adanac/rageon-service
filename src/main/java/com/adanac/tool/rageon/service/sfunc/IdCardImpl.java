@@ -14,7 +14,7 @@ import java.net.URLEncoder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.adanac.tool.rageon.intf.sfunc.IdCard;
+import com.adanac.tool.rageon.intf.sfunc.intf.IdCardService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
@@ -22,7 +22,7 @@ import com.alibaba.fastjson.JSONObject;
  * 查询身份信息
  */
 @Service
-public class IdCardImpl implements IdCard {
+public class IdCardImpl implements IdCardService {
 
 	@Value("${baiDU_apiKey}")
 	private String apiKey;

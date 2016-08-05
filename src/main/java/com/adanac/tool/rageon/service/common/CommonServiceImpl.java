@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import com.adanac.framework.log.MyLogger;
 import com.adanac.framework.log.MyLoggerFactory;
 import com.adanac.framework.page.Pager;
+import com.adanac.framework.page.PagerParam;
 import com.adanac.framework.web.controller.BaseResult;
 import com.adanac.tool.rageon.constant.RageonConstant;
-import com.adanac.tool.rageon.intf.common.entity.BootstrapPage;
 import com.adanac.tool.rageon.intf.common.entity.CommonDto;
 import com.adanac.tool.rageon.intf.common.service.BaseDao;
 import com.adanac.tool.rageon.intf.common.service.CommonService;
@@ -27,7 +27,7 @@ public class CommonServiceImpl implements CommonService {
 	private MyLogger log = MyLoggerFactory.getLogger(CommonServiceImpl.class);
 
 	@Override
-	public Pager<CommonDto> queryCommonDtoPage(CommonDto commonDto, BootstrapPage param, Integer flag) {
+	public Pager<CommonDto> queryCommonDtoPage(CommonDto commonDto, PagerParam param, Integer flag) {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("passwd", commonDto.getPasswd());
 		paramMap.put("age", commonDto.getAge());
@@ -156,6 +156,22 @@ public class CommonServiceImpl implements CommonService {
 			br.setStatus(BaseResult.ERROR);
 		}
 		return br;
+	}
+
+	@Override
+	public CommonDto getCommonDto(String id) {
+		log.info("====getCommonDto===={id:" + id + "}");
+		try {
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("id", id);
+			log.info("getFromDB {} ", paramMap);
+			CommonDto commonDto = baseDao.queryForObject("tabCommon.select", paramMap, CommonDto.class);
+			return commonDto;
+		} catch (Exception e) {
+			log.error("调用getCommonDto异常,error{}",
+					new Object[] { "[" + com.alibaba.fastjson.JSONObject.toJSONString(id) + "]", e.getMessage() });
+		}
+		return null;
 	}
 
 }

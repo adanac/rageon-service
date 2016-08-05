@@ -119,7 +119,7 @@ public class ActiveMqServiceImpl implements ActiveMqService, InitializingBean {
 					monitorDto.setProcessTime(TimeUtil.getCurrentTimestamp());
 					monitorService.mod(monitorDto);
 				} catch (Exception e) {
-					log.info("MqService========>{}", e);
+					log.error("MQ异常{}===>", new Object[] { e.getMessage() });
 					throw new SysException("MQService", e);
 				}
 			}

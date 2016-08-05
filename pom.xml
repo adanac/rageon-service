@@ -28,6 +28,26 @@
 		<artifactId>solr-client</artifactId>
 		<version>1.0.0</version>
 	</dependency>
+	<dependency>
+			<groupId>com.bn.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>v1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.bn.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>v1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.bn.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+			<version>v1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.bn.poi</groupId>
+			<artifactId>xmlbeans</artifactId>
+			<version>v1</version>
+		</dependency>
 	</dependencies>
 	<scm><!-- 注意：必须是正确的svn路径 -->
 	</scm>
