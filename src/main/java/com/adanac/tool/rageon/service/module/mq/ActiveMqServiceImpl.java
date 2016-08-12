@@ -20,9 +20,9 @@ import com.adanac.framework.mq.activemq.consumer.MQConsumer;
 import com.adanac.framework.mq.activemq.producer.MQProducer;
 import com.adanac.framework.utils.JsonUtils;
 import com.adanac.framework.utils.TimeUtil;
-import com.adanac.tool.rageon.intf.module.mq.entity.MonitorDto;
-import com.adanac.tool.rageon.intf.module.mq.service.ActiveMqService;
-import com.adanac.tool.rageon.intf.module.mq.service.MonitorService;
+import com.adanac.tool.rageon.module.mq.entity.MonitorDto;
+import com.adanac.tool.rageon.module.mq.service.ActiveMqService;
+import com.adanac.tool.rageon.module.mq.service.MonitorService;
 
 @Service("activeMqService")
 public class ActiveMqServiceImpl implements ActiveMqService, InitializingBean {

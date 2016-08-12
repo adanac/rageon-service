@@ -10,8 +10,8 @@ import com.adanac.framework.log.MyLogger;
 import com.adanac.framework.log.MyLoggerFactory;
 import com.adanac.framework.mq.activemq.MsgListener;
 import com.adanac.framework.mq.activemq.consumer.MQConsumer;
-import com.adanac.tool.rageon.intf.module.mq.entity.MonitorDto;
-import com.adanac.tool.rageon.intf.module.mq.service.MonitorService;
+import com.adanac.tool.rageon.module.mq.entity.MonitorDto;
+import com.adanac.tool.rageon.module.mq.service.MonitorService;
 import com.alibaba.fastjson.JSONObject;
 
 /**

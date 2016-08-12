@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.adanac.framework.page.Pager;
 import com.adanac.framework.page.PagerParam;
 import com.adanac.framework.utils.TimeUtil;
-import com.adanac.tool.rageon.intf.common.service.BaseDao;
-import com.adanac.tool.rageon.intf.front.entity.ActivityDto;
-import com.adanac.tool.rageon.intf.front.service.ActivityBaseService;
+import com.adanac.tool.rageon.common.service.BaseDao;
+import com.adanac.tool.rageon.front.entity.ActivityDto;
+import com.adanac.tool.rageon.front.service.ActivityBaseService;
 
 /**
  * 活动基础业务实现类

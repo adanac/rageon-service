@@ -6,8 +6,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.adanac.commclient.solr.dto.SolrGoodsDto;
-import com.adanac.commclient.solr.intf.SolrGoodsSearchService;
+import com.adanac.commonclient.solr.dto.SolrGoodsDto;
+import com.adanac.commonclient.solr.intf.SolrGoodsSearchService;
 import com.adanac.tool.rageon.BaseTest;
 
 public class SolrGoodsSearchServiceImplTest extends BaseTest {

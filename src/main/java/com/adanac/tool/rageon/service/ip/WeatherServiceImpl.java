@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.adanac.framework.log.MyLogger;
 import com.adanac.framework.log.MyLoggerFactory;
 import com.adanac.framework.utils.StringUtils;
-import com.adanac.tool.rageon.intf.ip.service.WeatherService;
+import com.adanac.tool.rageon.ip.service.WeatherService;
 import com.adanac.tool.rageon.utils.WeatherUtils;
 
 @Service

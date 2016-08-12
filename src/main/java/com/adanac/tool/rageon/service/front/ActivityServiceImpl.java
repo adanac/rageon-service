@@ -8,10 +8,10 @@ import com.adanac.framework.log.MyLogger;
 import com.adanac.framework.log.MyLoggerFactory;
 import com.adanac.framework.page.Pager;
 import com.adanac.framework.utils.UUIDGenerator;
-import com.adanac.tool.rageon.intf.front.entity.ActivityDto;
-import com.adanac.tool.rageon.intf.front.entity.ActivityQueryDto;
-import com.adanac.tool.rageon.intf.front.service.ActivityBaseService;
-import com.adanac.tool.rageon.intf.front.service.ActivityService;
+import com.adanac.tool.rageon.front.entity.ActivityDto;
+import com.adanac.tool.rageon.front.entity.ActivityQueryDto;
+import com.adanac.tool.rageon.front.service.ActivityBaseService;
+import com.adanac.tool.rageon.front.service.ActivityService;
 
 /**
  * 限时活动实现类

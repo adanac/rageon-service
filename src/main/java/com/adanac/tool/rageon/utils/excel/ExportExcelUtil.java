@@ -3,7 +3,6 @@ package com.adanac.tool.rageon.utils.excel;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -125,28 +124,12 @@ public class ExportExcelUtil<T> {
 		this.format = format;
 	}
 
-	// public void exportExcel(Collection<T> dataset, OutputStream out) {
-	// exportExcel("EXCEL文档导出", null, null, dataset, out, "yyyy-MM-dd");
-	// }
-	//
-	// public void exportExcel(String[] headers, Collection<T> dataset,
-	// OutputStream out) {
-	// exportExcel("EXCEL文档导出", headers, null, dataset, out, "yyyy-MM-dd");
-	// }
-	//
-	// public void exportExcel(String title,String[] headers, Collection<T>
-	// dataset, OutputStream out) {
-	// exportExcel(title, headers, null, dataset, out, "yyyy-MM-dd");
-	// }
-	//
-
 	public void exportExcel(Collection<T> dataset, OutputStream out) {
 
 		ExportExcelUtil.ExportTransIntface transIntf = new ExportExcelUtil.ExportTransIntface() {
 
 			@Override
 			public String transformValue(Object obj) {
-				// TODO Auto-generated method stub
 				String textValue = null;
 				Object value = obj;
 				if (value instanceof Boolean) {
@@ -269,24 +252,7 @@ public class ExportExcelUtil<T> {
 					// richString.applyFont(font3);
 					sheet.autoSizeColumn(indexCell);
 					cell.setCellValue(richString);
-				} catch (SecurityException e) {
-					// TODO Auto-generated catch block
-					log.error("excel 文件导出失败", e);
-					e.printStackTrace();
-				} catch (NoSuchMethodException e) {
-					// TODO Auto-generated catch block
-					log.error("excel 文件导出失败", e);
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					log.error("excel 文件导出失败", e);
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					log.error("excel 文件导出失败", e);
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					// TODO Auto-generated catch block
+				} catch (Exception e) {
 					log.error("excel 文件导出失败", e);
 					e.printStackTrace();
 				} finally {
@@ -298,7 +264,6 @@ public class ExportExcelUtil<T> {
 		try {
 			workbook.write(out);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			log.error("excel 文件导出失败", e);
 			e.printStackTrace();
 		}

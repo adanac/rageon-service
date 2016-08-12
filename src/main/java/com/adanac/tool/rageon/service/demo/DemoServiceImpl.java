@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.adanac.framework.page.Pager;
 import com.adanac.framework.page.PagerParam;
-import com.adanac.tool.rageon.intf.demo.entity.DemoDto;
-import com.adanac.tool.rageon.intf.demo.service.DemoService;
+import com.adanac.tool.rageon.demo.entity.DemoDto;
+import com.adanac.tool.rageon.demo.service.DemoService;
 
 @Service("demoService")
 public class DemoServiceImpl implements DemoService {

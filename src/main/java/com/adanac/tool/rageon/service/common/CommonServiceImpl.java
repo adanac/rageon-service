@@ -12,10 +12,10 @@ import com.adanac.framework.log.MyLoggerFactory;
 import com.adanac.framework.page.Pager;
 import com.adanac.framework.page.PagerParam;
 import com.adanac.framework.web.controller.BaseResult;
+import com.adanac.tool.rageon.common.entity.CommonDto;
+import com.adanac.tool.rageon.common.service.BaseDao;
+import com.adanac.tool.rageon.common.service.CommonService;
 import com.adanac.tool.rageon.constant.RageonConstant;
-import com.adanac.tool.rageon.intf.common.entity.CommonDto;
-import com.adanac.tool.rageon.intf.common.service.BaseDao;
-import com.adanac.tool.rageon.intf.common.service.CommonService;
 import com.esotericsoftware.minlog.Log;
 
 @Service

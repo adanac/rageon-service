@@ -7,7 +7,7 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import com.adanac.framework.web.controller.BaseResult;
-import com.adanac.tool.rageon.intf.file.craw.CrawService;
+import com.adanac.tool.rageon.file.craw.CrawService;
 
 @Service
 public class CrawServiceImpl implements CrawService {

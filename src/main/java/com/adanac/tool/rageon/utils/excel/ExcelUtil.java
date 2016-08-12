@@ -22,7 +22,7 @@ import com.adanac.framework.log.MyLogger;
 import com.adanac.framework.log.MyLoggerFactory;
 import com.adanac.framework.utils.StringUtils;
 import com.adanac.tool.rageon.constant.RageonConstant;
-import com.adanac.tool.rageon.intf.sfunc.entity.TradeDto;
+import com.adanac.tool.rageon.sfunc.entity.TradeDto;
 import com.adanac.tool.rageon.utils.RageUtil;
 
 public class ExcelUtil {

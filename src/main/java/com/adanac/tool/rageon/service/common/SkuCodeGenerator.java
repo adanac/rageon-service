@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import com.adanac.framework.exception.SysException;
 import com.adanac.framework.log.MyLogger;
 import com.adanac.framework.log.MyLoggerFactory;
-import com.adanac.tool.rageon.intf.common.service.BaseDao;
+import com.adanac.tool.rageon.common.service.BaseDao;
 
 @Service
 public class SkuCodeGenerator {

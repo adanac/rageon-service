@@ -55,7 +55,8 @@
 	<!-- JNDI数据源 -->
 	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/demo"
 		proxy-interface="javax.sql.DataSource" lookup-on-startup="false" />
-	 
+	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/rageon"
+		proxy-interface="javax.sql.DataSource" lookup-on-startup="false" />
 	<!-- JMS数据源的引用 -->
 	<!-- connection factory, if your send and receive queue managers are difference, then configure 2 factories  -->
 	<!-- <jee:jndi-lookup id="jmsConnectionFactory" jndi-name="jms/queueConnectionFactory"/>

@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.adanac.framework.web.controller.BaseResult;
-import com.adanac.tool.rageon.intf.common.entity.CommonDto;
-import com.adanac.tool.rageon.intf.common.service.BaseDao;
-import com.adanac.tool.rageon.intf.sql.SqlService;
+import com.adanac.tool.rageon.common.entity.CommonDto;
+import com.adanac.tool.rageon.common.service.BaseDao;
+import com.adanac.tool.rageon.sql.SqlService;
 import com.esotericsoftware.minlog.Log;
 
 @Service

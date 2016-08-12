@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sqlMap namespace="tb_Menu">
+	<sql id="queryAll">
+		<![CDATA[
+			select * from rageon.tb_menu m where 1 = 1
+		]]>
+	</sql>
+
+	<sql id="queryCond">
+    	<![CDATA[
+    	    select * from rageon.tb_menu m
+    	    where 1=1
+    	    <#if id?exists && id!="">
+    			and m.id like :id
+    		</#if>
+    		<#if pid?exists && pid!="">
+    			and m.pid = :pid
+    		</#if>
+    	    <#if name?exists && name!="">
+    			and m.name like CONCAT('%',:name,'%')
+    		</#if>
+    		 <#if url?exists && url!="">
+    			and m.url like CONCAT('%',:url,'%')
+    		</#if>
+    	    <#if shortUrl?exists && shortUrl!="">
+    			and m.shortUrl like CONCAT('%',:shorUrl,'%')
+    		</#if>
+		]]>
+    </sql>
+
+	<sql id="queryOne">
+    	<![CDATA[
+    	    select * from rageon.tb_menu m
+    	    where 1=1
+    	    <#if id?exists && id!="">
+    			and m.id = :id
+    		</#if>
+    		<#if pid?exists && pid!="">
+    			and m.pid = :pid
+    		</#if>
+		]]>
+    </sql>
+	
+	<sql id="insert">
+    	<![CDATA[
+    	    insert into rageon.tb_menu(ID,PID,NAME,URL,SHORTURL,CREATETIME,UPDATETIME)
+    	    values 
+    	    (:id,:pid,:name,:url,:shortUrl,:createTime,:updateTime)
+		]]>
+    </sql>
+    
+    <sql id="update">
+    	<![CDATA[
+    	    update rageon.tb_menu set ID = :id
+    	    <#if username?exists && username!="">
+    	    	,username = :username
+    	    </#if>
+    	    <#if passwd?exists && passwd!="">
+    	    	,passwd = :passwd
+    	    </#if>
+    	    <#if age?exists && age!="">
+    	    	,age = :age
+    	    </#if>
+    	    where ID = :id
+		]]>
+    </sql>
+    
+    <sql id="delete">
+    	<![CDATA[
+    	    delete from rageon.tb_menu where ID = :id
+		]]>
+    </sql>
+    
+</sqlMap>

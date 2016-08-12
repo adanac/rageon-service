@@ -14,9 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.adanac.framework.exception.SysException;
 import com.adanac.framework.utils.UUIDGenerator;
-import com.adanac.tool.rageon.intf.front.entity.GoodDto;
-import com.adanac.tool.rageon.intf.front.service.GoodBaseService;
-import com.adanac.tool.rageon.intf.front.service.GoodService;
+import com.adanac.tool.rageon.front.entity.GoodDto;
+import com.adanac.tool.rageon.front.service.GoodBaseService;
+import com.adanac.tool.rageon.front.service.GoodService;
 import com.alibaba.dubbo.rpc.protocol.rest.support.ContentType;
 import com.esotericsoftware.minlog.Log;
 

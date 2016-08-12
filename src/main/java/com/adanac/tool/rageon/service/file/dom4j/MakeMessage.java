@@ -1,6 +1,6 @@
 package com.adanac.tool.rageon.service.file.dom4j;
 
-import com.adanac.tool.rageon.intf.file.dom4j.WeatherInfo;
+import com.adanac.tool.rageon.file.dom4j.WeatherInfo;
 
 public class MakeMessage {
 	WeatherInfo weather;

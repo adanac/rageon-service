@@ -13,7 +13,7 @@ import org.springframework.util.StringUtils;
 
 import com.adanac.framework.log.MyLogger;
 import com.adanac.framework.log.MyLoggerFactory;
-import com.adanac.tool.rageon.intf.common.service.CacheService;
+import com.adanac.tool.rageon.common.service.CacheService;
 
 /**
  */

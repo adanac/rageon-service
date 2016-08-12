@@ -8,8 +8,8 @@ import java.util.Map;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.adanac.tool.rageon.intf.front.entity.GoodDto;
-import com.adanac.tool.rageon.intf.front.service.GoodBaseService;
+import com.adanac.tool.rageon.front.entity.GoodDto;
+import com.adanac.tool.rageon.front.service.GoodBaseService;
 
 import junit.framework.TestCase;
 

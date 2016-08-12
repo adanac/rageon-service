@@ -19,7 +19,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.adanac.commclient.solr.SolrGoodsSearchServiceImpl;
+import com.adanac.commonclient.solr.SolrGoodsSearchServiceImpl;
 import com.adanac.framework.exception.SysException;
 import com.adanac.framework.log.MyLogger;
 import com.adanac.framework.log.MyLoggerFactory;
@@ -31,8 +31,8 @@ import com.adanac.framework.uniconfig.client.UniconfigNode;
 import com.adanac.framework.utils.StringUtils;
 import com.adanac.tool.rageon.constant.AnchoredTypeEnum;
 import com.adanac.tool.rageon.constant.SkuStatusEnum;
-import com.adanac.tool.rageon.intf.module.solr.entity.SolrGoodsDto;
-import com.adanac.tool.rageon.intf.module.solr.service.SearchService;
+import com.adanac.tool.rageon.module.solr.entity.SolrGoodsDto;
+import com.adanac.tool.rageon.module.solr.service.SearchService;
 import com.adanac.tool.rageon.utils.EscapeUtil;
 import com.adanac.tool.rageon.utils.UrlBuilder;
 import com.alibaba.fastjson.JSONArray;
@@ -122,8 +122,8 @@ public class SearchServiceImpl implements SearchService, InitializingBean {
 		PagerParam param = new PagerParam();
 		param.setPageNumber(1);
 		param.setPageSize(10);
-		Pager<com.adanac.commclient.solr.dto.SolrGoodsDto> datas = s.searchGoods(companyId, null, goodName, desc, null,
-				param);
+		Pager<com.adanac.commonclient.solr.dto.SolrGoodsDto> datas = s.searchGoods(companyId, null, goodName, desc,
+				null, param);
 		System.out.println(datas.getDatas().size());
 	}
 
@@ -131,12 +131,12 @@ public class SearchServiceImpl implements SearchService, InitializingBean {
 	 * 测试solr-client
 	 */
 	@Override
-	public Pager<com.adanac.commclient.solr.dto.SolrGoodsDto> searchGoodsSolrClient(String companyId) {
+	public Pager<com.adanac.commonclient.solr.dto.SolrGoodsDto> searchGoodsSolrClient(String companyId) {
 		SolrGoodsSearchServiceImpl solrGood = new SolrGoodsSearchServiceImpl();
 		PagerParam param = new PagerParam();
 		param.setPageNumber(1);
 		param.setPageSize(10);
-		Pager<com.adanac.commclient.solr.dto.SolrGoodsDto> datas = solrGood.searchGoods(companyId, null, null, null,
+		Pager<com.adanac.commonclient.solr.dto.SolrGoodsDto> datas = solrGood.searchGoods(companyId, null, null, null,
 				null, param);
 		return datas;
 	}

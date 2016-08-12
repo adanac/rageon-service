@@ -8,8 +8,8 @@ import com.adanac.framework.log.MyLogger;
 import com.adanac.framework.log.MyLoggerFactory;
 import com.adanac.framework.utils.JsonUtils;
 import com.adanac.tool.rageon.BaseTest;
-import com.adanac.tool.rageon.intf.front.entity.ActivityDto;
-import com.adanac.tool.rageon.intf.front.service.ActivityService;
+import com.adanac.tool.rageon.front.entity.ActivityDto;
+import com.adanac.tool.rageon.front.service.ActivityService;
 
 public class ActivityServiceImplTest extends BaseTest {
 	private MyLogger log = MyLoggerFactory.getLogger(ActivityServiceImplTest.class);

@@ -7,7 +7,7 @@ import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.adanac.tool.rageon.intf.file.dom4j.WeatherInfo;
+import com.adanac.tool.rageon.file.dom4j.WeatherInfo;
 
 /**获取网络时间*/
 public class GetCurrentTimeOnline {

@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.adanac.framework.page.Pager;
 import com.adanac.framework.page.PagerParam;
-import com.adanac.tool.rageon.intf.common.service.BaseDao;
-import com.adanac.tool.rageon.intf.front.entity.GoodDto;
-import com.adanac.tool.rageon.intf.front.service.GoodBaseService;
+import com.adanac.tool.rageon.common.service.BaseDao;
+import com.adanac.tool.rageon.front.entity.GoodDto;
+import com.adanac.tool.rageon.front.service.GoodBaseService;
 
 @Service("goodBaseService")
 public class GoodBaseServiceImpl implements GoodBaseService {

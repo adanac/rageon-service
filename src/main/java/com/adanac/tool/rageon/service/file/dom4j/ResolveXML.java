@@ -8,9 +8,9 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.xml.sax.InputSource;
 
-import com.adanac.tool.rageon.intf.file.dom4j.Pollution;
-import com.adanac.tool.rageon.intf.file.dom4j.WeatherInfo;
-import com.adanac.tool.rageon.intf.file.dom4j.Zhishu;
+import com.adanac.tool.rageon.file.dom4j.Pollution;
+import com.adanac.tool.rageon.file.dom4j.WeatherInfo;
+import com.adanac.tool.rageon.file.dom4j.Zhishu;
 
 /**@author find
  * 解析获取的xml，提取出里面的信息

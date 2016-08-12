@@ -3,7 +3,7 @@
 
 	<sql id="queryIn">
     	<![CDATA[
-    	    select * from TAB3 where 1=1 
+    	    select * from demo.TAB3 where 1=1 
     	    AND name in (${username})
     			
 		]]>
@@ -11,7 +11,7 @@
     
 	<sql id="queryList">
     	<![CDATA[
-    	    select * from TAB3 where 1=1 
+    	    select * from demo.TAB3 where 1=1 
     	    <#if username?exists && username!="">
     			and NAME like CONCAT('%', :username, '%')
     		</#if>
@@ -20,7 +20,7 @@
     
 	<sql id="select">
     	<![CDATA[
-    	    select * from TAB3 m
+    	    select * from demo.TAB3 m
     	    where 1=1
     	    <#if username?exists && username!="">
     			and m.name = :username
@@ -36,7 +36,7 @@
 	
 	<sql id="insert">
     	<![CDATA[
-    	    insert into TAB3(NAME,PASS,AGE)
+    	    insert into demo.TAB3(NAME,PASS,AGE)
     	    values 
     	    (:name,:pwd,:age)
     	    

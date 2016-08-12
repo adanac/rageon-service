@@ -3,7 +3,7 @@ package com.adanac.tool.rageon.service.module.disconf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.adanac.tool.rageon.intf.module.disconf.service.DisconfService;
+import com.adanac.tool.rageon.module.disconf.service.DisconfService;
 import com.adanac.tool.rageon.service.common.RageonUniConfig;
 
 /**

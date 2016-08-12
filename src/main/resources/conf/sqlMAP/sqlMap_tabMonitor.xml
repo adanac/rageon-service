@@ -3,7 +3,7 @@
 
 	<sql id="queryCond">
     	<![CDATA[
-    	    select * from tab_monitor m
+    	    select * from demo.tab_monitor m
     	    where 1=1
     	    <#if id?exists && id!="">
     			and m.id = :id
@@ -25,7 +25,7 @@
 
 	<sql id="select">
     	<![CDATA[
-    	    select * from tab_monitor m
+    	    select * from demo.tab_monitor m
     	    where 1=1
     	    <#if id?exists && id!="">
     			and m.ID = :id
@@ -44,7 +44,7 @@
 	
 	<sql id="insert">
     	<![CDATA[
-    	    insert into tab_monitor(ID,TYPE,HAPPEN_TIME,CONTENT)
+    	    insert into demo.tab_monitor(ID,TYPE,HAPPEN_TIME,CONTENT)
     	    values 
     	    (:id,:type,:happenTime,:content)
 		]]>
@@ -52,7 +52,7 @@
     
     <sql id="update">
     	<![CDATA[
-    	    update tab_monitor set ID = :id
+    	    update demo.tab_monitor set ID = :id
     	    <#if type?exists && type!="">
     	    	,TYPE = :type
     	    </#if>
@@ -68,7 +68,7 @@
     
     <sql id="delete">
     	<![CDATA[
-    	    delete from tab_monitor where ID = :id
+    	    delete from demo.tab_monitor where ID = :id
 		]]>
     </sql>
     

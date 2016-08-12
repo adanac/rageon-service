@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.adanac.framework.dac.client.IPaginationDacClient;
 import com.adanac.framework.dac.pagination.PaginationResult;
 import com.adanac.framework.page.Pager;
-import com.adanac.tool.rageon.intf.common.service.BaseDao;
+import com.adanac.tool.rageon.common.service.BaseDao;
 
 /**
  * BaseDao的实现类，对数据库进行操作的封装类

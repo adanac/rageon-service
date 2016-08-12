@@ -3,7 +3,7 @@
 
 	<sql id="queryCond">
     	<![CDATA[
-    	    select * from tab_common m
+    	    select * from demo.tab_common m
     	    where 1=1
     	    <#if id?exists && id!="">
     			and m.id like :id
@@ -22,7 +22,7 @@
 
 	<sql id="select">
     	<![CDATA[
-    	    select * from tab_common m
+    	    select * from demo.tab_common m
     	    where 1=1
     	    <#if id?exists && id!="">
     			and m.id = :id
@@ -65,7 +65,7 @@
     
     <sql id="delete">
     	<![CDATA[
-    	    delete from tab_common where ID = :id
+    	    delete from demo.tab_common where ID = :id
 		]]>
     </sql>
     

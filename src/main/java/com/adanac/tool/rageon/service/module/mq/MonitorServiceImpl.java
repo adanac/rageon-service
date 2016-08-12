@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.adanac.framework.exception.SysException;
 import com.adanac.framework.utils.TimeUtil;
-import com.adanac.tool.rageon.intf.common.service.BaseDao;
-import com.adanac.tool.rageon.intf.module.mq.entity.MonitorDto;
-import com.adanac.tool.rageon.intf.module.mq.service.MonitorService;
+import com.adanac.tool.rageon.common.service.BaseDao;
+import com.adanac.tool.rageon.module.mq.entity.MonitorDto;
+import com.adanac.tool.rageon.module.mq.service.MonitorService;
 import com.adanac.tool.rageon.utils.uuid.DefaultSequenceGenerator;
 
 @Service
