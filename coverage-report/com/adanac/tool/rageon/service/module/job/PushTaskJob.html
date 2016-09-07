@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JMockit Coverage Report - PushTaskJob.java</title>
+  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+  <link rel='stylesheet' type='text/css' href='../../../../../../../coverage.css'/>
+  <link rel='shortcut icon' type='image/png' href='../../../../../../../logo.png'/>
+  <script type='text/javascript' src='../../../../../../../coverage.js'></script>
+  <script type='text/javascript' src='../../../../../../../prettify.js'></script>
+</head>
+<body onload='prettyPrint()'>
+  <table cellpadding='0' cellspacing='1'>
+    <caption>rageon-service\src\main\java\com\adanac\tool\rageon\service\module\job\PushTaskJob.java</caption>
+    <tr>
+      <td class='line'>1</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>package com.adanac.tool.rageon.service.module.job;</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td><pre class='imports prettyprint' onclick='showHideLines(this)'><div>import java.util.Date;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.adanac.framework.utils.DateUtils;
+import com.adanac.tool.rageon.common.entity.CommonDto;
+import com.adanac.tool.rageon.common.service.CommonService;
+import com.alibaba.fastjson.JSON;
+</div><span>import ...</span></pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+ * 定时任务
+ */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>19</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>@Component</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>20</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>public class PushTaskJob {</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>22</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	private static Logger <span class='static uncovered' title='Reads: 0 Writes: 0'>logger</span> = LoggerFactory.getLogger(PushTaskJob.class);</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>24</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	@Autowired</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>25</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	private CommonService <span class='instance uncovered' title='Reads: 0 Writes: 0'>commonService</span>;</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>27</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	public void excute() {</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>29</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		logger.info("发送消息通知  start:" + DateUtils.format(new Date(), DateUtils.DEFAULT_YEAR_MONTH_DAY_HMS));</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>30</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		Long start = System.currentTimeMillis();</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>32</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		CommonDto commonDto = new CommonDto();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>33</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		commonDto.setUsername("");</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>34</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		List&lt;CommonDto> list = commonService.queryCommonDtoList(commonDto);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>35</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		logger.info("getAllPushingTask:" + JSON.toJSONString(list));</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>37</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		for (CommonDto dto : list) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>38</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			try {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>39</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>				logger.info(dto.toString());</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>41</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			} catch (Exception e) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>42</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>				logger.error("发送失败：{}", e);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>43</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>				continue;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>44</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			}</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>46</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		}</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>48</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		Long end = System.currentTimeMillis();</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>50</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		logger.info("发送消息通知  end,耗时：" + (end - start) + "毫秒");</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>52</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	}</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>54</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	public static void main(String[] args) throws Exception {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>55</td><td>&nbsp;</td>
+      <td><pre class='comment'>		// String content ="&lt;html>\\n &lt;head>&lt;/head>\\n &lt;body>\\n &lt;p>&lt;img</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>56</td><td>&nbsp;</td>
+      <td><pre class='comment'>		// src=\\\"http://mmcimg-10016961.image.myqcloud.com/e23a11d3-4a96-43aa-ba5f-98fcbb1a4dfa\\\">111&lt;/p>\\n</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>57</td><td>&nbsp;</td>
+      <td><pre class='comment'>		// &lt;/body>\\n&lt;/html>";</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>58</td><td>&nbsp;</td>
+      <td><pre class='comment'>		// System.out.println(dealArticleContent("wxdfec4bcf9f6a2423",</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>59</td><td>&nbsp;</td>
+      <td><pre class='comment'>		// content));</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>60</td><td>&nbsp;</td>
+      <td><pre class='comment'>		// uploadImgForUrl("wx37ba853fe28f9200",</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>61</td><td>&nbsp;</td>
+      <td><pre class='comment'>		// "http://mmcimg-10016961.image.myqcloud.com/dab50d9e-54ce-434d-9bfb-94c95a4d63e2");</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>		/*
+		 * Map&lt;String, String> params= new HashMap&lt;>(); params.put("massTuple",
+		 * "{\"articles\":[{\"content\":\"&lt;ol class=\\\" list-paddingleft-2\\\" style=\\\"list-style-type: decimal;\\\">&lt;li>&lt;p>kkkk&lt;/p>&lt;/li>&lt;li>&lt;p>dsda&lt;/p>&lt;/li>&lt;li>&lt;p>addss&lt;/p>&lt;/li>&lt;li>&lt;p>dasdas&lt;/p>&lt;/li>&lt;li>&lt;p>adas&lt;/p>&lt;/li>&lt;li>&lt;p>ads&lt;br/>&lt;/p>&lt;/li>&lt;/ol>&lt;p style=\\\"line-height: 16px;\\\">&lt;img style=\\\"vertical-align: middle; margin-right: 2px;\\\" src=\\\"http://mmbiz.qpic.cn/mmbiz/rYdMqTvibW5GOicNv7PObY4dDUXYM5B1mKianr8c9LTwVDpWOMJmOqxJmxhRUoqaL55OXomvXwde6RKZ9qqhmjIxA/0\\\"/>&lt;a style=\\\"font-size:12px; color:#0066cc;\\\" href=\\\"http://oa.bizcent.com:5001/g1/M00/00/0D/wKgCR1dWWceAXm6dAAACl3jc_ZA832.txt\\\" title=\\\"Noname1.txt\\\">Noname1.txt&lt;/a>&lt;/p>&lt;p style=\\\"line-height: 16px;\\\">&lt;img style=\\\"vertical-align: middle; margin-right: 2px;\\\" src=\\\"http://192.168.1.23:8080/mmc-web/RES/assets/plugins/ueditor1_4_3_2-src/dialogs/attachment/fileTypeImages/icon_txt.gif\\\"/>&lt;a style=\\\"font-size:12px; color:#0066cc;\\\" href=\\\"http://oa.bizcent.com:5001/g1/M00/00/0D/wKgCR1dWWm2AFLr8AAEkuJN4Jcw05.xlsx\\\" title=\\\"role_bugs.xlsx\\\">role_bugs.xlsx&lt;/a>&lt;/p>&lt;p style=\\\"line-height: 16px;\\\">&lt;img style=\\\"vertical-align: middle; margin-right: 2px;\\\" src=\\\"http://192.168.1.23:8080/mmc-web/RES/assets/plugins/ueditor1_4_3_2-src/dialogs/attachment/fileTypeImages/icon_doc.gif\\\"/>&lt;a style=\\\"font-size:12px; color:#0066cc;\\\" href=\\\"http://oa.bizcent.com:5001/g1/M00/00/0D/wKgCR1dWXq6AaPAdAAraKCs3ZZg01.docx\\\" title=\\\"???????????????????.docx\\\">???????????????????.docx&lt;/a>&lt;/p>&lt;p style=\\\"line-height: 16px;\\\">&lt;a style=\\\"font-size:12px; color:#0066cc;\\\" href=\\\"http://oa.bizcent.com:5001/g1/M00/00/0D/wKgCR1dWWceAXm6dAAACl3jc_ZA832.txt\\\" title=\\\"Noname1.txt\\\">&lt;/a>&lt;br/>&lt;/p>&lt;p>&lt;br/>&lt;/p>\",\"show_cover_pic\":\"0\",\"thumb_media_id\":\"Sf9oUO4EnT8iR9OqUdE6tb357J0JLPOnGKoYHpCpC70kZ2hZfRNWKrBEM5P9Q7do\",\"title\":\"2222\"}],\"messageType\":\"mpnews\"}"
+		 * ); params.put("weixin_id", "wxdfec4bcf9f6a2423");
+		 * params.put("openId", "obECAtw6l-JhvoiZdVaEz3_xpgts"); String url=
+		 * "http://www.bizb2b.com.cn/bn-weixin-test/weixin/mass/previewMassNews.do";
+		 * String resp = HttpUtil.post(url, params);
+		 * System.out.println("resp:"+resp);
+		 */</div><span>		/*...*/</span></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>		/*
+		 * Map&lt;String, String> params= new HashMap&lt;>(); params.put("massTuple",
+		 * "{\"content\":\"自动ceshi\",\"messageType\":\"text\"}");
+		 * params.put("weixin_id", "wxdfec4bcf9f6a2423"); params.put("openId",
+		 * "obECAtw6l-JhvoiZdVaEz3_xpgts"); String url=
+		 * "http://www.bizb2b.com.cn/bn-weixin-test/weixin/mass/previewMassNews.do";
+		 * String resp = HttpUtil.post(url, params); System.out.println(resp);
+		 */</div><span>		/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>81</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	}</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>83</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>}</pre></td>
+    </tr>
+  </table>
+</body>
+</html>

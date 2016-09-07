@@ -38,9 +38,9 @@ import com.adanac.framework.mq.activemq.consumer.MQConsumer;
 import com.adanac.framework.mq.activemq.producer.MQProducer;
 import com.adanac.framework.utils.JsonUtils;
 import com.adanac.framework.utils.TimeUtil;
-import com.adanac.tool.rageon.intf.module.mq.entity.MonitorDto;
-import com.adanac.tool.rageon.intf.module.mq.service.ActiveMqService;
-import com.adanac.tool.rageon.intf.module.mq.service.MonitorService;
+import com.adanac.tool.rageon.module.mq.entity.MonitorDto;
+import com.adanac.tool.rageon.module.mq.service.ActiveMqService;
+import com.adanac.tool.rageon.module.mq.service.MonitorService;
 </div><span>import ...</span></pre></td>
     </tr>
     <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
@@ -335,7 +335,7 @@ import com.adanac.tool.rageon.intf.module.mq.service.MonitorService;
     </tr>
     <tr>
       <td class='line'>122</td><td>&nbsp;</td>
-      <td><pre class='prettyprint'>					log.info("MqService========>{}", e);</pre></td>
+      <td><pre class='prettyprint'>					log.error("MQ异常{}===>", new Object[] { e.getMessage() });</pre></td>
     </tr>
     <tr>
       <td class='line'>123</td><td>&nbsp;</td>

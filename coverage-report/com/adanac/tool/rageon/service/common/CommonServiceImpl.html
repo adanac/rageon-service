@@ -28,12 +28,12 @@ import org.springframework.stereotype.Service;
 import com.adanac.framework.log.MyLogger;
 import com.adanac.framework.log.MyLoggerFactory;
 import com.adanac.framework.page.Pager;
+import com.adanac.framework.page.PagerParam;
 import com.adanac.framework.web.controller.BaseResult;
+import com.adanac.tool.rageon.common.entity.CommonDto;
+import com.adanac.tool.rageon.common.service.BaseDao;
+import com.adanac.tool.rageon.common.service.CommonService;
 import com.adanac.tool.rageon.constant.RageonConstant;
-import com.adanac.tool.rageon.intf.common.entity.BootstrapPage;
-import com.adanac.tool.rageon.intf.common.entity.CommonDto;
-import com.adanac.tool.rageon.intf.common.service.BaseDao;
-import com.adanac.tool.rageon.intf.common.service.CommonService;
 import com.esotericsoftware.minlog.Log;
 </div><span>import ...</span></pre></td>
     </tr>
@@ -67,7 +67,7 @@ import com.esotericsoftware.minlog.Log;
     </tr>
     <tr>
       <td class='line'>30</td><td>&nbsp;</td>
-      <td><pre class='prettyprint'>	public Pager&lt;CommonDto> queryCommonDtoPage(CommonDto commonDto, BootstrapPage param, Integer flag) {</pre></td>
+      <td><pre class='prettyprint'>	public Pager&lt;CommonDto> queryCommonDtoPage(CommonDto commonDto, PagerParam param, Integer flag) {</pre></td>
     </tr>
     <tr>
       <td></td><td class='count'>0</td>
@@ -591,6 +591,67 @@ import com.esotericsoftware.minlog.Log;
     <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
     <tr>
       <td class='line'>161</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	@Override</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>162</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	public CommonDto getCommonDto(String id) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>163</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		log.info("====getCommonDto===={id:" + id + "}");</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>164</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		try {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>165</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			Map&lt;String, Object> paramMap = new HashMap&lt;String, Object>();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>166</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			paramMap.put("id", id);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>167</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			log.info("getFromDB {} ", paramMap);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>168</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			CommonDto commonDto = baseDao.queryForObject("tabCommon.select", paramMap, CommonDto.class);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>169</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			return commonDto;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>170</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		} catch (Exception e) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>171</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>			log.error("调用getCommonDto异常,error{}",</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>172</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>					new Object[] { "[" + com.alibaba.fastjson.JSONObject.toJSONString(id) + "]", e.getMessage() });</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>173</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		}</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>174</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>		return null;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>175</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>	}</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>177</td><td>&nbsp;</td>
       <td><pre class='prettyprint'>}</pre></td>
     </tr>
   </table>
